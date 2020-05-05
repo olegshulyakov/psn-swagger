@@ -21,7 +21,7 @@ consumes:
 produces:
   - application/json
 paths:
-  /store/api/chihiro/00_09_000/geo:
+  /kamaji/api/chihiro/00_09_000/geo:
     get:
       tags:
         - "Geo"

@@ -291,27 +291,9 @@ paths:
           description: "No data found"
           schema:
             $ref: "#/definitions/ErrorResponse"
-parameters:
-  Country:
-    name: "country"
-    in: "path"
-    required: true
-    type: "string"
-    description: "Two symbols country code to search in, i.e. 'en'"
-  Language:
-    name: "language"
-    in: "path"
-    description: "Two symbols language code to search in, i.e. 'gb'"
-    required: true
-    type: "string"
-  Cusa:
-    name: "cusa"
-    in: "path"
-    description: "CUSA code to search"
-    required: true
-    type: "string"
 definitions:
   ErrorResponse:
+    type: object
     required:
       - codeName
     properties:

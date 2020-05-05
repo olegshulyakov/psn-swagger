@@ -1,60 +1,323 @@
 swagger: "2.0"
 info:
-  version: "0.0.1"
-  title: Hello World App
-# during dev, should point to your local machine
-host: localhost:10010
-# basePath prefixes all resource paths 
+  description: "This is a sample Playstation Network server. You can find out more about Country/Region at [PSN Country selector](https://www.playstation.com/country-selector/index.html).\n\nFor search all games you can use the CUSA key for regions: \n\n* `STORE-MSF75508-FULLGAMES` for Europe.\n\n* `STORE-MSF77008-ALLGAMES` for America."
+  version: "1.0.0"
+  title: Playstation Store API
+host: store.playstation.com
 basePath: /
-# 
+tags:
+  - name: "Geo"
+    description: "Geo location"
+  - name: "Container"
+    description: "JSON representation of the game"
 schemes:
-  # tip: remove http to make production-grade
-  - http
   - https
-# format of bodies a client can send (Content-Type)
 consumes:
   - application/json
-# format of the responses to the client (Accepts)
 produces:
   - application/json
 paths:
-  /hello:
-    # binds a127 app logic to a route
-    x-swagger-router-controller: hello_world
+  /store/api/chihiro/00_09_000/geo:
     get:
-      description: Returns 'Hello' to the caller
-      # used as the method name of the controller
-      operationId: hello
-      parameters:
-        - name: name
-          in: query
-          description: The name of the person to whom to say hello
-          required: false
-          type: string
+      tags:
+        - "Geo"
+      summary: "Returns geo location"
+      description: ""
+      deprecated: true
+      operationId: "getGeo"
+      produces:
+        - "application/json"
       responses:
         "200":
           description: Success
-          schema:
-            # a pointer to a definition
-            $ref: "#/definitions/HelloWorldResponse"
-        # responses may fall through to errors
         default:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-  /swagger:
-    x-swagger-pipe: swagger_raw
-# complex objects have schema definitions
+  /store/api/chihiro/00_09_000/container/{country}/{language}/999/{cusa}:
+    get:
+      tags:
+        - "Container"
+      summary: "Find game information for specific container at country/region by CUSA."
+      description: ""
+      operationId: "getGameInfo"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "country"
+          in: "path"
+          description: "Country to search in"
+          required: true
+          type: "string"
+        - name: "language"
+          in: "path"
+          description: "Language to search in"
+          required: true
+          type: "string"
+        - name: "cusa"
+          in: "path"
+          description: "CUSA code to search"
+          required: true
+          type: "string"
+        - name: "size"
+          in: "query"
+          description: "Limit result count"
+          required: false
+          type: "number"
+          format: "int32"
+          default: 1
+          minimum: 0
+        - name: "start"
+          in: "query"
+          description: "Offset"
+          required: false
+          type: "number"
+          format: "int32"
+          default: 0
+          minimum: 0
+        - name: "sort"
+          in: "query"
+          description: "Sort by"
+          required: false
+          type: "string"
+          enum:
+            - "timestamp"
+            - "release_date"
+        - name: "direction"
+          in: "query"
+          description: "Sort at"
+          required: false
+          type: "string"
+          enum:
+            - "asc"
+            - "desc"
+      responses:
+        "200":
+          description: Successful operation
+        "400":
+          description: "Invalid"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "404":
+          description: "No data found"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /chihiro-api/viewfinder/{country}/{language}/999/{cusa}:
+    get:
+      tags:
+        - "Container"
+      summary: "Find game information for specific container at country/region by CUSA."
+      description: ""
+      deprecated: true
+      operationId: "findView"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "country"
+          in: "path"
+          description: "Country to search in"
+          required: true
+          type: "string"
+        - name: "language"
+          in: "path"
+          description: "Language to search in"
+          required: true
+          type: "string"
+        - name: "cusa"
+          in: "path"
+          description: "CUSA code to search"
+          required: true
+          type: "string"
+        - name: "size"
+          in: "query"
+          description: "Limit result count"
+          required: false
+          type: "number"
+          format: "int32"
+          default: 1
+          minimum: 0
+        - name: "start"
+          in: "query"
+          description: "Offset"
+          required: false
+          type: "number"
+          format: "int32"
+          default: 0
+          minimum: 0
+        - name: "sort"
+          in: "query"
+          description: "Sort by"
+          required: false
+          type: "string"
+          enum:
+            - "timestamp"
+            - "release_date"
+        - name: "direction"
+          in: "query"
+          description: "Sort at"
+          required: false
+          type: "string"
+          enum:
+            - "asc"
+            - "desc"
+      responses:
+        "200":
+          description: Successful operation
+        "400":
+          description: "Invalid"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "404":
+          description: "No data found"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /store/api/chihiro/00_09_000/tumbler/{country}/{language}/999/{searchString}:
+    get:
+      tags:
+        - "Container"
+      summary: "Find game information for specific container at country/region by search string."
+      description: ""
+      operationId: "searchGame"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "country"
+          in: "path"
+          description: "Country to search in"
+          required: true
+          type: "string"
+        - name: "language"
+          in: "path"
+          description: "Language to search in"
+          required: true
+          type: "string"
+        - name: "searchString"
+          in: "path"
+          description: "String to search"
+          required: true
+          type: "string"
+        - name: "size"
+          in: "query"
+          description: "Limit result count"
+          required: false
+          type: "number"
+          format: "int32"
+          default: 1
+          minimum: 0
+        - name: "start"
+          in: "query"
+          description: "Offset"
+          required: false
+          type: "number"
+          format: "int32"
+          default: 0
+          minimum: 0
+        - name: "sort"
+          in: "query"
+          description: "Sort by"
+          required: false
+          type: "string"
+          enum:
+            - "timestamp"
+            - "release_date"
+        - name: "direction"
+          in: "query"
+          description: "Sort at"
+          required: false
+          type: "string"
+          enum:
+            - "asc"
+            - "desc"
+      responses:
+        "200":
+          description: Successful operation
+        "400":
+          description: "Invalid"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "404":
+          description: "No data found"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /store/api/chihiro/00_09_000/titlecontainer/{country}/{language}/999/{cusa}/image:
+    get:
+      tags:
+        - "Container"
+      summary: "Find game image link at country/region by CUSA."
+      description: ""
+      operationId: "getGameImageLink"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "country"
+          in: "path"
+          description: "Country to search in"
+          required: true
+          type: "string"
+        - name: "language"
+          in: "path"
+          description: "Language to search in"
+          required: true
+          type: "string"
+        - name: "cusa"
+          in: "path"
+          description: "CUSA code to search"
+          required: true
+          type: "string"
+        - name: "w"
+          in: "query"
+          description: "Width"
+          required: false
+          type: "number"
+          format: "int32"
+          default: 240
+          minimum: 0
+        - name: "f"
+          in: "query"
+          description: "Height"
+          required: false
+          type: "number"
+          format: "int32"
+          default: 240
+          minimum: 0
+      responses:
+        "200":
+          description: Successful operation
+        "400":
+          description: "Invalid"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "404":
+          description: "No data found"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+parameters:
+  Country:
+    name: "country"
+    in: "path"
+    required: true
+    type: "string"
+    description: "Country to search in"
+  Language:
+    name: "language"
+    in: "path"
+    description: "Language to search in"
+    required: true
+    type: "string"
+  Cusa:
+    name: "cusa"
+    in: "path"
+    description: "CUSA code to search"
+    required: true
+    type: "string"
 definitions:
-  HelloWorldResponse:
-    required:
-      - message
-    properties:
-      message:
-        type: string
   ErrorResponse:
     required:
-      - message
+      - codeName
     properties:
-      message:
+      codeName:
+        type: string
+      cause:
+        type: string
+      errorUUID:
         type: string

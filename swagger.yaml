@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  description: "This is a sample Playstation Network server. You can find out more about Country/Region at [PSN Country selector](https://www.playstation.com/country-selector/index.html).\n\nFor search all games you can use the CUSA key for regions: \n\n* `STORE-MSF75508-FULLGAMES` for Europe.\n\n* `STORE-MSF77008-ALLGAMES` for America.\n\n\ See more usefull information at [Home](https://github.com/olegshulyakov/psn-swagger) page"
+  description: "This is a sample Playstation Network server. You can find out more about Country/Region at [PSN Country selector](https://www.playstation.com/country-selector/index.html).\n\nFor search all games you can use the CUSA key for regions: \n\n* `STORE-MSF75508-FULLGAMES` for Europe.\n\n* `STORE-MSF77008-ALLGAMES` for America.\n\n\ See more usefull information at [Github](https://github.com/olegshulyakov/psn-swagger) page"
   version: "1.0.0"
   title: Playstation API
 host: store.playstation.com

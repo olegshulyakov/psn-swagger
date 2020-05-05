@@ -48,22 +48,22 @@ paths:
           in: "path"
           description: "Two symbols country code to search in, i.e. 'en'"
           required: true
-          type: "string"
+          type: string
         - name: "language"
           in: "path"
           description: "Two symbols language code to search in, i.e. 'gb'"
           required: true
-          type: "string"
+          type: string
         - name: "cusa"
           in: "path"
           description: "CUSA code to search"
           required: true
-          type: "string"
+          type: string
         - name: "size"
           in: "query"
           description: "Limit result count"
           required: false
-          type: "number"
+          type: integer
           format: "int32"
           default: 1
           minimum: 0
@@ -71,7 +71,7 @@ paths:
           in: "query"
           description: "Offset"
           required: false
-          type: "number"
+          type: integer
           format: "int32"
           default: 0
           minimum: 0
@@ -79,7 +79,7 @@ paths:
           in: "query"
           description: "Sort by"
           required: false
-          type: "string"
+          type: string
           enum:
             - "timestamp"
             - "release_date"
@@ -87,7 +87,7 @@ paths:
           in: "query"
           description: "Sort at"
           required: false
-          type: "string"
+          type: string
           enum:
             - "asc"
             - "desc"
@@ -117,22 +117,22 @@ paths:
           in: "path"
           description: "Two symbols country code to search in, i.e. 'en'"
           required: true
-          type: "string"
+          type: string
         - name: "language"
           in: "path"
           description: "Two symbols language code to search in, i.e. 'gb'"
           required: true
-          type: "string"
+          type: string
         - name: "cusa"
           in: "path"
           description: "CUSA code to search"
           required: true
-          type: "string"
+          type: string
         - name: "size"
           in: "query"
           description: "Limit result count"
           required: false
-          type: "number"
+          type: integer
           format: "int32"
           default: 1
           minimum: 0
@@ -140,7 +140,7 @@ paths:
           in: "query"
           description: "Offset"
           required: false
-          type: "number"
+          type: integer
           format: "int32"
           default: 0
           minimum: 0
@@ -148,7 +148,7 @@ paths:
           in: "query"
           description: "Sort by"
           required: false
-          type: "string"
+          type: string
           enum:
             - "timestamp"
             - "release_date"
@@ -156,7 +156,7 @@ paths:
           in: "query"
           description: "Sort at"
           required: false
-          type: "string"
+          type: string
           enum:
             - "asc"
             - "desc"
@@ -185,22 +185,22 @@ paths:
           in: "path"
           description: "Two symbols country code to search in, i.e. 'en'"
           required: true
-          type: "string"
+          type: string
         - name: "language"
           in: "path"
           description: "Two symbols language code to search in, i.e. 'gb'"
           required: true
-          type: "string"
+          type: string
         - name: "searchString"
           in: "path"
           description: "String to search"
           required: true
-          type: "string"
+          type: string
         - name: "size"
           in: "query"
           description: "Limit result count"
           required: false
-          type: "number"
+          type: integer
           format: "int32"
           default: 1
           minimum: 0
@@ -208,7 +208,7 @@ paths:
           in: "query"
           description: "Offset"
           required: false
-          type: "number"
+          type: integer
           format: "int32"
           default: 0
           minimum: 0
@@ -216,7 +216,7 @@ paths:
           in: "query"
           description: "Sort by"
           required: false
-          type: "string"
+          type: string
           enum:
             - "timestamp"
             - "release_date"
@@ -224,7 +224,7 @@ paths:
           in: "query"
           description: "Sort at"
           required: false
-          type: "string"
+          type: string
           enum:
             - "asc"
             - "desc"
@@ -239,47 +239,62 @@ paths:
           description: "No data found"
           schema:
             $ref: "#/definitions/ErrorResponse"
-  /store/api/chihiro/00_09_000/titlecontainer/{country}/{language}/999/{cusa}/image:
+  /store/api/chihiro/00_09_000/container/{country}/{language}/999/{cusa}/image:
     get:
       tags:
         - "Container"
-      summary: "Find game image link at country/region by CUSA."
+      summary: "Find game image at country/region by CUSA."
       description: ""
-      operationId: "getGameImageLink"
+      operationId: "getGameImage"
       produces:
-        - "application/json"
+        - "image/jpeg;charset=UTF-8"
       parameters:
         - name: "country"
           in: "path"
           description: "Two symbols country code to search in, i.e. 'en'"
           required: true
-          type: "string"
+          type: string
         - name: "language"
           in: "path"
           description: "Two symbols language code to search in, i.e. 'gb'"
           required: true
-          type: "string"
+          type: string
         - name: "cusa"
           in: "path"
           description: "CUSA code to search"
           required: true
-          type: "string"
+          type: string
         - name: "w"
           in: "query"
-          description: "Width"
+          description: "Width in px"
           required: false
-          type: "number"
-          format: "int32"
-          default: 240
+          type: integer
           minimum: 0
-        - name: "f"
+        - name: "h"
           in: "query"
-          description: "Height"
+          description: "Height in px"
           required: false
-          type: "number"
-          format: "int32"
-          default: 240
+          type: integer
           minimum: 0
+        - name: "bg_color"
+          in: "query"
+          description: "Background color"
+          required: false
+          type: integer
+          minimum: 0
+        - name: "opacity"
+          in: "query"
+          description: "Opacity"
+          required: false
+          type: integer
+          default: 100
+          minimum: 0
+          maximum: 100
+        - name: "platform"
+          in: "query"
+          description: "Platform, i.e. 'chihiro'"
+          required: false
+          type: string
       responses:
         "200":
           description: Successful operation

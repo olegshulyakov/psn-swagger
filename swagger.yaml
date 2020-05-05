@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   description: "This is a sample Playstation Network server. You can find out more about Country/Region at [PSN Country selector](https://www.playstation.com/country-selector/index.html).\n\nFor search all games you can use the CUSA key for regions: \n\n* `STORE-MSF75508-FULLGAMES` for Europe.\n\n* `STORE-MSF77008-ALLGAMES` for America.\n\n\ See more usefull information at [Home](https://github.com/olegshulyakov/psn-swagger) page"
   version: "1.0.0"
-  title: Playstation Store API
+  title: Playstation API
 host: store.playstation.com
 basePath: /
 tags:
@@ -33,8 +33,8 @@ paths:
       responses:
         "200":
           description: Success
-        default:
-          description: Error
+        "400":
+          description: "Invalid"
           schema:
             $ref: "#/definitions/ErrorResponse"
   /store/api/chihiro/00_09_000/container/{country}/{language}/999/{cusa}:

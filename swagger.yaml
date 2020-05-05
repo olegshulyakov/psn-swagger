@@ -340,6 +340,118 @@ paths:
           enum:
             - "asc"
             - "desc"
+        - name: "gameContentType"
+          in: "query"
+          description: "Content type"
+          required: false
+          type: string
+          enum:
+            - bundles
+            - games
+            - timed_trials
+        - name: "subtitleLang"
+          in: "query"
+          description: "Subtitle language code or several values combined by comma, i.e. 'en', 'en,fr'"
+          required: false
+          type: string
+        - name: "releaseDate"
+          in: "query"
+          description: "Release date"
+          required: false
+          type: string
+          enum:
+            - coming_soon
+            - last_7_days
+            - last_30_days
+        - name: "gameDemo"
+          in: "query"
+          description: "Is game demo"
+          required: false
+          type: boolean
+        - name: "price"
+          in: "query"
+          description: "Price range, i.e. 100-1000"
+          required: false
+          type: string
+        - name: "genre"
+          in: "query"
+          description: "Genre"
+          required: false
+          type: string
+          enum:
+            - action
+            - adult
+            - adventure
+            - arcade
+            - brain_training
+            - casual
+            - educational
+            - family
+            - fighting
+            - fitness
+            - horror
+            - musicrhythm
+            - party
+            - puzzle
+            - racing
+            - role_playing_games
+            - shooter
+            - simulation
+            - simulator
+            - sports
+            - strategy
+            - unique
+        - name: "topCategory"
+          in: "query"
+          description: "Top category"
+          required: false
+          type: string
+          enum:
+            - demo
+            - disc_based_game
+            - downloadable_game
+            - game_content
+        - name: "voiceLang"
+          in: "query"
+          description: "Voice language code or several values combined by comma, i.e. 'en', 'en,fr'"
+          required: false
+          type: string
+        - name: "game_type"
+          in: "query"
+          description: "Game type"
+          required: false
+          type: string
+          enum:
+            - bundles
+            - disc_only
+            - minis
+            - ps2_classics
+            - ps3_full_games
+            - ps4_full_games
+            - ps_vita_games
+            - psn_games
+            - psone_classics
+            - psp_games
+            - vr_games
+        - name: "relationship"
+          in: "query"
+          description: "Relationship"
+          required: false
+          type: string
+          enum:
+            - bundles
+            - demos
+            - extras
+        - name: "platform"
+          in: "query"
+          description: "Platform"
+          required: false
+          type: string
+          enum:
+            - ps4
+            - ps3
+            - psp
+            - vita
       responses:
         "200":
           description: Successful operation

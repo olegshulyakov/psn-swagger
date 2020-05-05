@@ -8,8 +8,12 @@ basePath: /
 tags:
   - name: "Geo"
     description: "Geo location"
-  - name: "Container"
-    description: "JSON representation of the game"
+  - name: "Games"
+    description: "Query JSON representation of the game from store"
+  - name: "Search"
+    description: "Search JSON representation of the game"
+  - name: "Images"
+    description: "Search JSON representation of the game"
 schemes:
   - https
 consumes:
@@ -36,7 +40,7 @@ paths:
   /store/api/chihiro/00_09_000/container/{country}/{language}/999/{cusa}:
     get:
       tags:
-        - "Container"
+        - "Games"
       summary: "Find game information for specific container at country/region by CUSA."
       description: ""
       produces:
@@ -215,7 +219,7 @@ paths:
   /chihiro-api/viewfinder/{country}/{language}/999/{cusa}:
     get:
       tags:
-        - "Container"
+        - "Games"
       summary: "Find game information for specific container at country/region by CUSA."
       description: ""
       deprecated: true
@@ -283,7 +287,7 @@ paths:
   /store/api/chihiro/00_09_000/tumbler/{country}/{language}/999/{searchString}:
     get:
       tags:
-        - "Container"
+        - "Search"
       summary: "Find game information for specific container at country/region by search string."
       description: ""
       produces:
@@ -350,7 +354,7 @@ paths:
   /store/api/chihiro/00_09_000/container/{country}/{language}/999/{cusa}/image:
     get:
       tags:
-        - "Container"
+        - "Images"
       summary: "Find game image at country/region by CUSA."
       description: ""
       produces:

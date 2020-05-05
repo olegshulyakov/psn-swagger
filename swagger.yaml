@@ -46,12 +46,12 @@ paths:
       parameters:
         - name: "country"
           in: "path"
-          description: "Country to search in"
+          description: "Two symbols country code to search in, i.e. 'en'"
           required: true
           type: "string"
         - name: "language"
           in: "path"
-          description: "Language to search in"
+          description: "Two symbols language code to search in, i.e. 'gb'"
           required: true
           type: "string"
         - name: "cusa"
@@ -115,12 +115,12 @@ paths:
       parameters:
         - name: "country"
           in: "path"
-          description: "Country to search in"
+          description: "Two symbols country code to search in, i.e. 'en'"
           required: true
           type: "string"
         - name: "language"
           in: "path"
-          description: "Language to search in"
+          description: "Two symbols language code to search in, i.e. 'gb'"
           required: true
           type: "string"
         - name: "cusa"
@@ -183,12 +183,12 @@ paths:
       parameters:
         - name: "country"
           in: "path"
-          description: "Country to search in"
+          description: "Two symbols country code to search in, i.e. 'en'"
           required: true
           type: "string"
         - name: "language"
           in: "path"
-          description: "Language to search in"
+          description: "Two symbols language code to search in, i.e. 'gb'"
           required: true
           type: "string"
         - name: "searchString"
@@ -251,12 +251,12 @@ paths:
       parameters:
         - name: "country"
           in: "path"
-          description: "Country to search in"
+          description: "Two symbols country code to search in, i.e. 'en'"
           required: true
           type: "string"
         - name: "language"
           in: "path"
-          description: "Language to search in"
+          description: "Two symbols language code to search in, i.e. 'gb'"
           required: true
           type: "string"
         - name: "cusa"
@@ -297,11 +297,11 @@ parameters:
     in: "path"
     required: true
     type: "string"
-    description: "Country to search in"
+    description: "Two symbols country code to search in, i.e. 'en'"
   Language:
     name: "language"
     in: "path"
-    description: "Language to search in"
+    description: "Two symbols language code to search in, i.e. 'gb'"
     required: true
     type: "string"
   Cusa:

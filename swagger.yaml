@@ -1,546 +1,586 @@
-swagger: "2.0"
+openapi: 3.0.1
 info:
-  description: "This is a sample Playstation Network server. You can find out more about Country/Region at [PSN Country selector](https://www.playstation.com/country-selector/index.html).\n\nFor search all games you can use the CUSA key for regions: \n\n* `STORE-MSF75508-FULLGAMES` for Europe.\n\n* `STORE-MSF77008-ALLGAMES` for America.\n\n\ See more usefull information at [Github](https://github.com/olegshulyakov/psn-swagger) page"
-  version: "1.0.0"
   title: Playstation API
-host: store.playstation.com
-basePath: /
+  description: "This is a sample Playstation Network server. \
+    \ You can find out more about Country/Region at [PSN Country selector](https://www.playstation.com/country-selector/index.html).\n\n\
+    \ For search all games you can use the CUSA key for regions: \n\n\
+    \ * `STORE-MSF75508-FULLGAMES` for Europe.\n\n\
+    \ * `STORE-MSF77008-ALLGAMES` for America.\n\n\
+    \ See more usefull information at [Github](https://github.com/olegshulyakov/psn-swagger) page"
+  version: 1.0.0
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: https://store.playstation.com/
 tags:
-  - name: "Geo"
-    description: "Geo location"
-  - name: "Games"
-    description: "Query JSON representation of the game from store"
-  - name: "Search"
-    description: "Search JSON representation of the game"
-  - name: "Images"
-    description: "Search JSON representation of the game"
-schemes:
-  - https
-consumes:
-  - application/json
-produces:
-  - application/json
+  - name: Geo
+    description: Geo location
+  - name: Games
+    description: Query JSON representation of the game from store
+  - name: Search
+    description: Search JSON representation of the game
+  - name: Images
+    description: Search JSON representation of the game
 paths:
   /kamaji/api/chihiro/00_09_000/geo:
     get:
       tags:
-        - "Geo"
-      summary: "Returns geo location"
-      description: ""
-      deprecated: true
-      produces:
-        - "application/json"
+        - Geo
+      summary: Returns geo location
       responses:
-        "200":
+        200:
           description: Success
-        "400":
-          description: "Invalid"
-          schema:
-            $ref: "#/definitions/ErrorResponse"
+          content: {}
+        400:
+          description: Invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      deprecated: true
   /store/api/chihiro/00_09_000/container/{country}/{language}/999/{cusa}:
     get:
       tags:
-        - "Games"
-      summary: "Find game information for specific container at country/region by CUSA."
-      description: ""
-      produces:
-        - "application/json"
+        - Games
+      summary: Find game information for specific container at country/region by CUSA.
       parameters:
-        - name: "country"
-          in: "path"
-          description: "Two symbols country code to search in, i.e. 'en'"
+        - name: country
+          in: path
+          description: Two symbols country code to search in, i.e. 'en'
           required: true
-          type: string
-        - name: "language"
-          in: "path"
-          description: "Two symbols language code to search in, i.e. 'gb'"
+          schema:
+            type: string
+        - name: language
+          in: path
+          description: Two symbols language code to search in, i.e. 'gb'
           required: true
-          type: string
-        - name: "cusa"
-          in: "path"
-          description: "CUSA code to search"
+          schema:
+            type: string
+        - name: cusa
+          in: path
+          description: CUSA code to search
           required: true
-          type: string
-        - name: "size"
-          in: "query"
-          description: "Limit result count"
-          required: false
-          type: integer
-          format: "int32"
-          default: 1
-          minimum: 0
-        - name: "start"
-          in: "query"
-          description: "Offset"
-          required: false
-          type: integer
-          format: "int32"
-          default: 0
-          minimum: 0
-        - name: "sort"
-          in: "query"
-          description: "Sort by"
-          required: false
-          type: string
-          enum:
-            - "timestamp"
-            - "release_date"
-        - name: "direction"
-          in: "query"
-          description: "Sort at"
-          required: false
-          type: string
-          enum:
-            - "asc"
-            - "desc"
-        - name: "gameContentType"
-          in: "query"
-          description: "Content type"
-          required: false
-          type: string
-          enum:
-            - bundles
-            - games
-            - timed_trials
-        - name: "subtitleLang"
-          in: "query"
-          description: "Subtitle language code or several values combined by comma, i.e. 'en', 'en,fr'"
-          required: false
-          type: string
-        - name: "releaseDate"
-          in: "query"
-          description: "Release date"
-          required: false
-          type: string
-          enum:
-            - coming_soon
-            - last_7_days
-            - last_30_days
-        - name: "gameDemo"
-          in: "query"
-          description: "Is game demo"
-          required: false
-          type: boolean
-        - name: "price"
-          in: "query"
-          description: "Price range, i.e. 100-1000"
-          required: false
-          type: string
-        - name: "genre"
-          in: "query"
-          description: "Genre"
-          required: false
-          type: string
-          enum:
-            - action
-            - adult
-            - adventure
-            - arcade
-            - brain_training
-            - casual
-            - educational
-            - family
-            - fighting
-            - fitness
-            - horror
-            - musicrhythm
-            - party
-            - puzzle
-            - racing
-            - role_playing_games
-            - shooter
-            - simulation
-            - simulator
-            - sports
-            - strategy
-            - unique
-        - name: "topCategory"
-          in: "query"
-          description: "Top category"
-          required: false
-          type: string
-          enum:
-            - demo
-            - disc_based_game
-            - downloadable_game
-            - game_content
-        - name: "voiceLang"
-          in: "query"
-          description: "Voice language code or several values combined by comma, i.e. 'en', 'en,fr'"
-          required: false
-          type: string
-        - name: "game_type"
-          in: "query"
-          description: "Game type"
-          required: false
-          type: string
-          enum:
-            - bundles
-            - disc_only
-            - minis
-            - ps2_classics
-            - ps3_full_games
-            - ps4_full_games
-            - ps_vita_games
-            - psn_games
-            - psone_classics
-            - psp_games
-            - vr_games
-        - name: "relationship"
-          in: "query"
-          description: "Relationship"
-          required: false
-          type: string
-          enum:
-            - bundles
-            - demos
-            - extras
-        - name: "platform"
-          in: "query"
-          description: "Platform"
-          required: false
-          type: string
-          enum:
-            - ps4
-            - ps3
-            - psp
-            - vita
+          schema:
+            type: string
+        - name: size
+          in: query
+          description: Limit result count
+          schema:
+            minimum: 0
+            type: integer
+            format: int32
+            default: 1
+        - name: start
+          in: query
+          description: Offset
+          schema:
+            minimum: 0
+            type: integer
+            format: int32
+            default: 0
+        - name: sort
+          in: query
+          description: Sort by
+          schema:
+            type: string
+            enum:
+              - timestamp
+              - release_date
+        - name: direction
+          in: query
+          description: Sort at
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        - name: gameContentType
+          in: query
+          description: Content type
+          schema:
+            type: string
+            enum:
+              - bundles
+              - games
+              - timed_trials
+        - name: subtitleLang
+          in: query
+          description: Subtitle language code or several values combined by comma, i.e.
+            'en', 'en,fr'
+          schema:
+            type: string
+        - name: releaseDate
+          in: query
+          description: Release date
+          schema:
+            type: string
+            enum:
+              - coming_soon
+              - last_7_days
+              - last_30_days
+        - name: gameDemo
+          in: query
+          description: Is game demo
+          schema:
+            type: boolean
+        - name: price
+          in: query
+          description: Price range, i.e. 100-1000
+          schema:
+            type: string
+        - name: genre
+          in: query
+          description: Genre
+          schema:
+            type: string
+            enum:
+              - action
+              - adult
+              - adventure
+              - arcade
+              - brain_training
+              - casual
+              - educational
+              - family
+              - fighting
+              - fitness
+              - horror
+              - musicrhythm
+              - party
+              - puzzle
+              - racing
+              - role_playing_games
+              - shooter
+              - simulation
+              - simulator
+              - sports
+              - strategy
+              - unique
+        - name: topCategory
+          in: query
+          description: Top category
+          schema:
+            type: string
+            enum:
+              - demo
+              - disc_based_game
+              - downloadable_game
+              - game_content
+        - name: voiceLang
+          in: query
+          description: Voice language code or several values combined by comma, i.e.
+            'en', 'en,fr'
+          schema:
+            type: string
+        - name: game_type
+          in: query
+          description: Game type
+          schema:
+            type: string
+            enum:
+              - bundles
+              - disc_only
+              - minis
+              - ps2_classics
+              - ps3_full_games
+              - ps4_full_games
+              - ps_vita_games
+              - psn_games
+              - psone_classics
+              - psp_games
+              - vr_games
+        - name: relationship
+          in: query
+          description: Relationship
+          schema:
+            type: string
+            enum:
+              - bundles
+              - demos
+              - extras
+        - name: platform
+          in: query
+          description: Platform
+          schema:
+            type: string
+            enum:
+              - ps4
+              - ps3
+              - psp
+              - vita
       responses:
-        "200":
+        200:
           description: Successful operation
-        "400":
-          description: "Invalid"
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-        "404":
-          description: "No data found"
-          schema:
-            $ref: "#/definitions/ErrorResponse"
+          content: {}
+        400:
+          description: Invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        404:
+          description: No data found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /chihiro-api/viewfinder/{country}/{language}/999/{cusa}:
     get:
       tags:
-        - "Games"
-      summary: "Find game information for specific container at country/region by CUSA."
-      description: ""
-      deprecated: true
-      produces:
-        - "application/json"
+        - Games
+      summary: Find game information for specific container at country/region by CUSA.
       parameters:
-        - name: "country"
-          in: "path"
-          description: "Two symbols country code to search in, i.e. 'en'"
+        - name: country
+          in: path
+          description: Two symbols country code to search in, i.e. 'en'
           required: true
-          type: string
-        - name: "language"
-          in: "path"
-          description: "Two symbols language code to search in, i.e. 'gb'"
+          schema:
+            type: string
+        - name: language
+          in: path
+          description: Two symbols language code to search in, i.e. 'gb'
           required: true
-          type: string
-        - name: "cusa"
-          in: "path"
-          description: "CUSA code to search"
+          schema:
+            type: string
+        - name: cusa
+          in: path
+          description: CUSA code to search
           required: true
-          type: string
-        - name: "size"
-          in: "query"
-          description: "Limit result count"
-          required: false
-          type: integer
-          format: "int32"
-          default: 1
-          minimum: 0
-        - name: "start"
-          in: "query"
-          description: "Offset"
-          required: false
-          type: integer
-          format: "int32"
-          default: 0
-          minimum: 0
-        - name: "sort"
-          in: "query"
-          description: "Sort by"
-          required: false
-          type: string
-          enum:
-            - "timestamp"
-            - "release_date"
-        - name: "direction"
-          in: "query"
-          description: "Sort at"
-          required: false
-          type: string
-          enum:
-            - "asc"
-            - "desc"
+          schema:
+            type: string
+        - name: size
+          in: query
+          description: Limit result count
+          schema:
+            minimum: 0
+            type: integer
+            format: int32
+            default: 1
+        - name: start
+          in: query
+          description: Offset
+          schema:
+            minimum: 0
+            type: integer
+            format: int32
+            default: 0
+        - name: sort
+          in: query
+          description: Sort by
+          schema:
+            type: string
+            enum:
+              - timestamp
+              - release_date
+        - name: direction
+          in: query
+          description: Sort at
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
       responses:
-        "200":
+        200:
           description: Successful operation
-        "400":
-          description: "Invalid"
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-        "404":
-          description: "No data found"
-          schema:
-            $ref: "#/definitions/ErrorResponse"
+          content: {}
+        400:
+          description: Invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        404:
+          description: No data found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      deprecated: true
   /store/api/chihiro/00_09_000/tumbler/{country}/{language}/999/{searchString}:
     get:
       tags:
-        - "Search"
-      summary: "Find game information for specific container at country/region by search string."
-      description: ""
-      produces:
-        - "application/json"
+        - Search
+      summary: Find game information for specific container at country/region by search
+        string.
       parameters:
-        - name: "country"
-          in: "path"
-          description: "Two symbols country code to search in, i.e. 'en'"
+        - name: country
+          in: path
+          description: Two symbols country code to search in, i.e. 'en'
           required: true
-          type: string
-        - name: "language"
-          in: "path"
-          description: "Two symbols language code to search in, i.e. 'gb'"
+          schema:
+            type: string
+        - name: language
+          in: path
+          description: Two symbols language code to search in, i.e. 'gb'
           required: true
-          type: string
-        - name: "searchString"
-          in: "path"
-          description: "String to search"
+          schema:
+            type: string
+        - name: searchString
+          in: path
+          description: String to search
           required: true
-          type: string
-        - name: "size"
-          in: "query"
-          description: "Limit result count"
-          required: false
-          type: integer
-          format: "int32"
-          default: 1
-          minimum: 0
-        - name: "start"
-          in: "query"
-          description: "Offset"
-          required: false
-          type: integer
-          format: "int32"
-          default: 0
-          minimum: 0
-        - name: "sort"
-          in: "query"
-          description: "Sort by"
-          required: false
-          type: string
-          enum:
-            - "timestamp"
-            - "release_date"
-        - name: "direction"
-          in: "query"
-          description: "Sort at"
-          required: false
-          type: string
-          enum:
-            - "asc"
-            - "desc"
-        - name: "gameContentType"
-          in: "query"
-          description: "Content type"
-          required: false
-          type: string
-          enum:
-            - bundles
-            - games
-            - timed_trials
-        - name: "subtitleLang"
-          in: "query"
-          description: "Subtitle language code or several values combined by comma, i.e. 'en', 'en,fr'"
-          required: false
-          type: string
-        - name: "releaseDate"
-          in: "query"
-          description: "Release date"
-          required: false
-          type: string
-          enum:
-            - coming_soon
-            - last_7_days
-            - last_30_days
-        - name: "gameDemo"
-          in: "query"
-          description: "Is game demo"
-          required: false
-          type: boolean
-        - name: "price"
-          in: "query"
-          description: "Price range, i.e. 100-1000"
-          required: false
-          type: string
-        - name: "genre"
-          in: "query"
-          description: "Genre"
-          required: false
-          type: string
-          enum:
-            - action
-            - adult
-            - adventure
-            - arcade
-            - brain_training
-            - casual
-            - educational
-            - family
-            - fighting
-            - fitness
-            - horror
-            - musicrhythm
-            - party
-            - puzzle
-            - racing
-            - role_playing_games
-            - shooter
-            - simulation
-            - simulator
-            - sports
-            - strategy
-            - unique
-        - name: "topCategory"
-          in: "query"
-          description: "Top category"
-          required: false
-          type: string
-          enum:
-            - demo
-            - disc_based_game
-            - downloadable_game
-            - game_content
-        - name: "voiceLang"
-          in: "query"
-          description: "Voice language code or several values combined by comma, i.e. 'en', 'en,fr'"
-          required: false
-          type: string
-        - name: "game_type"
-          in: "query"
-          description: "Game type"
-          required: false
-          type: string
-          enum:
-            - bundles
-            - disc_only
-            - minis
-            - ps2_classics
-            - ps3_full_games
-            - ps4_full_games
-            - ps_vita_games
-            - psn_games
-            - psone_classics
-            - psp_games
-            - vr_games
-        - name: "relationship"
-          in: "query"
-          description: "Relationship"
-          required: false
-          type: string
-          enum:
-            - bundles
-            - demos
-            - extras
-        - name: "platform"
-          in: "query"
-          description: "Platform"
-          required: false
-          type: string
-          enum:
-            - ps4
-            - ps3
-            - psp
-            - vita
+          schema:
+            type: string
+        - name: size
+          in: query
+          description: Limit result count
+          schema:
+            minimum: 0
+            type: integer
+            format: int32
+            default: 1
+        - name: start
+          in: query
+          description: Offset
+          schema:
+            minimum: 0
+            type: integer
+            format: int32
+            default: 0
+        - name: sort
+          in: query
+          description: Sort by
+          schema:
+            type: string
+            enum:
+              - timestamp
+              - release_date
+        - name: direction
+          in: query
+          description: Sort at
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        - name: gameContentType
+          in: query
+          description: Content type
+          schema:
+            type: string
+            enum:
+              - bundles
+              - games
+              - timed_trials
+        - name: subtitleLang
+          in: query
+          description: Subtitle language code or several values combined by comma, i.e.
+            'en', 'en,fr'
+          schema:
+            type: string
+        - name: releaseDate
+          in: query
+          description: Release date
+          schema:
+            type: string
+            enum:
+              - coming_soon
+              - last_7_days
+              - last_30_days
+        - name: gameDemo
+          in: query
+          description: Is game demo
+          schema:
+            type: boolean
+        - name: price
+          in: query
+          description: Price range, i.e. 100-1000
+          schema:
+            type: string
+        - name: genre
+          in: query
+          description: Genre
+          schema:
+            type: string
+            enum:
+              - action
+              - adult
+              - adventure
+              - arcade
+              - brain_training
+              - casual
+              - educational
+              - family
+              - fighting
+              - fitness
+              - horror
+              - musicrhythm
+              - party
+              - puzzle
+              - racing
+              - role_playing_games
+              - shooter
+              - simulation
+              - simulator
+              - sports
+              - strategy
+              - unique
+        - name: topCategory
+          in: query
+          description: Top category
+          schema:
+            type: string
+            enum:
+              - demo
+              - disc_based_game
+              - downloadable_game
+              - game_content
+        - name: voiceLang
+          in: query
+          description: Voice language code or several values combined by comma, i.e.
+            'en', 'en,fr'
+          schema:
+            type: string
+        - name: game_type
+          in: query
+          description: Game type
+          schema:
+            type: string
+            enum:
+              - bundles
+              - disc_only
+              - minis
+              - ps2_classics
+              - ps3_full_games
+              - ps4_full_games
+              - ps_vita_games
+              - psn_games
+              - psone_classics
+              - psp_games
+              - vr_games
+        - name: relationship
+          in: query
+          description: Relationship
+          schema:
+            type: string
+            enum:
+              - bundles
+              - demos
+              - extras
+        - name: platform
+          in: query
+          description: Platform
+          schema:
+            type: string
+            enum:
+              - ps4
+              - ps3
+              - psp
+              - vita
       responses:
-        "200":
+        200:
           description: Successful operation
-        "400":
-          description: "Invalid"
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-        "404":
-          description: "No data found"
-          schema:
-            $ref: "#/definitions/ErrorResponse"
+          content: {}
+        400:
+          description: Invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        404:
+          description: No data found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /store/api/chihiro/00_09_000/container/{country}/{language}/999/{cusa}/image:
     get:
       tags:
-        - "Images"
-      summary: "Find game image at country/region by CUSA."
-      description: ""
-      produces:
-        - "image/jpeg;charset=UTF-8"
+        - Images
+      summary: Find game image at country/region by CUSA.
       parameters:
-        - name: "country"
-          in: "path"
-          description: "Two symbols country code to search in, i.e. 'en'"
+        - name: country
+          in: path
+          description: Two symbols country code to search in, i.e. 'en'
           required: true
-          type: string
-        - name: "language"
-          in: "path"
-          description: "Two symbols language code to search in, i.e. 'gb'"
+          schema:
+            type: string
+        - name: language
+          in: path
+          description: Two symbols language code to search in, i.e. 'gb'
           required: true
-          type: string
-        - name: "cusa"
-          in: "path"
-          description: "CUSA code to search"
+          schema:
+            type: string
+        - name: cusa
+          in: path
+          description: CUSA code to search
           required: true
-          type: string
-        - name: "w"
-          in: "query"
-          description: "Width in px"
-          required: false
-          type: integer
-          minimum: 0
-        - name: "h"
-          in: "query"
-          description: "Height in px"
-          required: false
-          type: integer
-          minimum: 0
-        - name: "bg_color"
-          in: "query"
-          description: "Background color"
-          required: false
-          type: integer
-          minimum: 0
-        - name: "opacity"
-          in: "query"
-          description: "Opacity"
-          required: false
-          type: integer
-          default: 100
-          minimum: 0
-          maximum: 100
-        - name: "platform"
-          in: "query"
-          description: "Platform, i.e. 'chihiro'"
-          required: false
-          type: string
+          schema:
+            type: string
+        - name: w
+          in: query
+          description: Width in px
+          schema:
+            minimum: 0
+            type: integer
+        - name: h
+          in: query
+          description: Height in px
+          schema:
+            minimum: 0
+            type: integer
+        - name: bg_color
+          in: query
+          description: Background color
+          schema:
+            minimum: 0
+            type: integer
+        - name: opacity
+          in: query
+          description: Opacity
+          schema:
+            maximum: 100
+            minimum: 0
+            type: integer
+            default: 100
+        - name: platform
+          in: query
+          description: Platform, i.e. 'chihiro'
+          schema:
+            type: string
       responses:
-        "200":
+        200:
           description: Successful operation
-        "400":
-          description: "Invalid"
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-        "404":
-          description: "No data found"
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-definitions:
-  ErrorResponse:
-    type: object
-    required:
-      - codeName
-    properties:
-      codeName:
-        type: string
-      cause:
-        type: string
-      errorUUID:
-        type: string
-externalDocs:
-  description: "Find out more about Swagger"
-  url: "http://swagger.io"
+          content: {}
+        400:
+          description: Invalid
+          content:
+            image/jpeg;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        404:
+          description: No data found
+          content:
+            image/jpeg;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    AuthErrorResponse:
+      required:
+        - error
+        - error_code
+        - error_description
+      type: object
+      properties:
+        error_code:
+          type: integer
+        error:
+          type: string
+        error_description:
+          type: string
+        docs:
+          type: string
+    ErrorResponse:
+      required:
+        - codeName
+      type: object
+      properties:
+        codeName:
+          type: string
+        cause:
+          type: string
+        errorUUID:
+          type: string

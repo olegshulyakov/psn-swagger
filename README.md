@@ -2,9 +2,9 @@
 [![issues](https://img.shields.io/github/issues/olegshulyakov/psn-swagger?style=flat-square)](https://github.com/olegshulyakov/psn-swagger/issues)
 [![pull requests](https://img.shields.io/github/issues-pr/olegshulyakov/psn-swagger?style=flat-square)](https://github.com/olegshulyakov/psn-swagger/pulls)
 [![contributors](https://img.shields.io/github/contributors/olegshulyakov/psn-swagger?style=flat-square)](https://github.com/olegshulyakov/psn-swagger/graphs/contributors)
-![size](https://img.shields.io/github/repo-size/olegshulyakov/psn-swagger?style=flat-square)
-![licence](https://img.shields.io/github/license/olegshulyakov/psn-swagger?style=flat-square)
-![Website](https://img.shields.io/website?style=flat-square&url=https%3A%2F%2Folegshulyakov.github.io%2Fpsn-swagger%2F)
+[![size](https://img.shields.io/github/repo-size/olegshulyakov/psn-swagger?style=flat-square)](https://github.com/olegshulyakov/psn-swagger)
+[![licence](https://img.shields.io/github/license/olegshulyakov/psn-swagger?style=flat-square)](https://github.com/olegshulyakov/psn-swagger/blob/master/LICENSE)
+[![Website](https://img.shields.io/website?style=flat-square&url=https%3A%2F%2Folegshulyakov.github.io%2Fpsn-swagger%2F)](https://olegshulyakov.github.io/psn-swagger/)
 
 This is missed Swagger UI for Playstation Network API. Developed for the developers for prototype creation.
 

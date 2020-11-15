@@ -31,7 +31,7 @@ paths:
       responses:
         200:
           description: Success
-          content: {}
+          content: { }
         400:
           description: Invalid
           content:
@@ -39,7 +39,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
       deprecated: true
-  /store/api/chihiro/00_09_000/container/{country}/{language}/999/{cusa}:
+  /store/api/chihiro/00_09_000/container/{country}/{language}/{age}/{cusa}:
     get:
       tags:
         - Games
@@ -57,6 +57,14 @@ paths:
           required: true
           schema:
             type: string
+        - name: age
+          in: path
+          description: User's age
+          required: true
+          schema:
+            type: integer
+            format: int32
+            default: 999
         - name: cusa
           in: path
           description: CUSA code to search
@@ -212,7 +220,7 @@ paths:
       responses:
         200:
           description: Successful operation
-          content: {}
+          content: { }
         400:
           description: Invalid
           content:
@@ -225,7 +233,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-  /chihiro-api/viewfinder/{country}/{language}/999/{cusa}:
+  /chihiro-api/viewfinder/{country}/{language}/{age}/{cusa}:
     get:
       tags:
         - Games
@@ -243,6 +251,14 @@ paths:
           required: true
           schema:
             type: string
+        - name: age
+          in: path
+          description: User's age
+          required: true
+          schema:
+            type: integer
+            format: int32
+            default: 999
         - name: cusa
           in: path
           description: CUSA code to search
@@ -284,7 +300,7 @@ paths:
       responses:
         200:
           description: Successful operation
-          content: {}
+          content: { }
         400:
           description: Invalid
           content:
@@ -298,7 +314,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
       deprecated: true
-  /store/api/chihiro/00_09_000/tumbler/{country}/{language}/999/{searchString}:
+  /store/api/chihiro/00_09_000/tumbler/{country}/{language}/{age}/{searchString}:
     get:
       tags:
         - Search
@@ -317,6 +333,14 @@ paths:
           required: true
           schema:
             type: string
+        - name: age
+          in: path
+          description: User's age
+          required: true
+          schema:
+            type: integer
+            format: int32
+            default: 999
         - name: searchString
           in: path
           description: String to search
@@ -472,7 +496,7 @@ paths:
       responses:
         200:
           description: Successful operation
-          content: {}
+          content: { }
         400:
           description: Invalid
           content:
@@ -485,7 +509,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-  /store/api/chihiro/00_09_000/container/{country}/{language}/999/{cusa}/image:
+  /store/api/chihiro/00_09_000/container/{country}/{language}/{age}/{cusa}/image:
     get:
       tags:
         - Images
@@ -503,6 +527,14 @@ paths:
           required: true
           schema:
             type: string
+        - name: age
+          in: path
+          description: User's age
+          required: true
+          schema:
+            type: integer
+            format: int32
+            default: 999
         - name: cusa
           in: path
           description: CUSA code to search
@@ -543,7 +575,7 @@ paths:
       responses:
         200:
           description: Successful operation
-          content: {}
+          content: { }
         400:
           description: Invalid
           content:

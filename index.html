@@ -1,88 +1,65 @@
 <!-- HTML for static distribution bundle build -->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>Swagger UI</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.36.2/swagger-ui.css" integrity="sha512-tKlTmmIcJ/LXt94SNEbo3ZXMHhaa9quOeqk+sfMKYvTadSD2xSzmN95EOeITw7rmAQOuHStvbqA1W7fCU6RQZQ==" crossorigin="anonymous" />
-    <link href="https://static1.smartbear.co/swagger/media/assets/swagger_fav.png" type="image/png" rel="shortcut icon">
-    <link href="https://static1.smartbear.co/swagger/media/assets/swagger_fav.png" type="image/png" rel="icon">
-    <style>
-      html
-      {
-        box-sizing: border-box;
-        overflow: -moz-scrollbars-vertical;
-        overflow-y: scroll;
-      }
 
-      *,
-      *:before,
-      *:after
-      {
-        box-sizing: inherit;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <title>Swagger UI</title>
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.36.2/swagger-ui.css"
+        integrity="sha512-tKlTmmIcJ/LXt94SNEbo3ZXMHhaa9quOeqk+sfMKYvTadSD2xSzmN95EOeITw7rmAQOuHStvbqA1W7fCU6RQZQ=="
+        crossorigin="anonymous" />
+  <link href="https://static1.smartbear.co/swagger/media/assets/swagger_fav.png"
+        type="image/png"
+        rel="shortcut icon" />
+  <link href="https://static1.smartbear.co/swagger/media/assets/swagger_fav.png"
+        type="image/png"
+        rel="icon" />
+  <style>
+    html {
+      box-sizing: border-box;
+      overflow: -moz-scrollbars-vertical;
+      overflow-y: scroll;
+    }
 
-      body
-      {
-        margin:0;
-        background: #fafafa;
-      }
-    </style>
-  </head>
+    *,
+    *:before,
+    *:after {
+      box-sizing: inherit;
+    }
 
-  <body>
-    <div id="swagger-ui"></div>
+    body {
+      margin: 0;
+      background: #fafafa;
+    }
+  </style>
+</head>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.36.2/swagger-ui-bundle.js" integrity="sha512-jagGsunuxhVlmwu5k4Ilqq3vP/jNswEVvtY4X73k5cT7QHUtKhwXqa1i9tSUF50r+b7cnchPur8OkFMCMpC+1w==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.36.2/swagger-ui-standalone-preset.js" integrity="sha512-cmCLlusXBOHOWrvbMqERJ6+dGrVxuIWtf33LAapATba3LYQDZhW9S4pKlfhADbaKgC2MwoL7AqsRdjxMhuEEJA==" crossorigin="anonymous"></script>
-    <script>
-    window.onload = function() {
+<body>
+  <div id="swagger-ui"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.36.2/swagger-ui-bundle.js"
+          integrity="sha512-jagGsunuxhVlmwu5k4Ilqq3vP/jNswEVvtY4X73k5cT7QHUtKhwXqa1i9tSUF50r+b7cnchPur8OkFMCMpC+1w=="
+          crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.36.2/swagger-ui-standalone-preset.js"
+          integrity="sha512-cmCLlusXBOHOWrvbMqERJ6+dGrVxuIWtf33LAapATba3LYQDZhW9S4pKlfhADbaKgC2MwoL7AqsRdjxMhuEEJA=="
+          crossorigin="anonymous"></script>
+  <script>
+    window.onload = function () {
       // Begin Swagger UI call region
-      const ui = SwaggerUIBundle({
-        urls: [
-          {url: "store.yaml", name: "Store"}
-        ],
-        dom_id: '#swagger-ui',
+      const ui = SwaggerUIBundle( {
+        urls: [{ url: "store.json", name: "Store" }],
+        dom_id: "#swagger-ui",
         deepLinking: true,
-        presets: [
-          SwaggerUIBundle.presets.apis,
-          SwaggerUIStandalonePreset
-        ],
-        plugins: [
-          SwaggerUIBundle.plugins.DownloadUrl
-        ],
-        layout: "StandaloneLayout"
-      })
+        presets: [SwaggerUIBundle.presets.apis, SwaggerUIStandalonePreset],
+        plugins: [SwaggerUIBundle.plugins.DownloadUrl],
+        layout: "StandaloneLayout",
+      } );
       // End Swagger UI call region
 
-      window.ui = ui
-    }
+      window.ui = ui;
+    };
   </script>
+</body>
 
-    <!-- Yandex.Metrika counter -->
-    <script type="text/javascript" >
-      (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-      (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-
-      ym(64870363, "init", {
-        clickmap:true,
-        trackLinks:true,
-        accurateTrackBounce:true
-      });
-    </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/64870363" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-    <!-- /Yandex.Metrika counter -->
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154748317-1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'UA-154748317-1');
-    </script>
-
-  </body>
 </html>

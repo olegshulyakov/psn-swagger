@@ -1,0 +1,963 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Playstation Store API",
+        "description": "This is a sample Playstation Store server.  You can find out more about Country/Region at [PSN Country selector](https://www.playstation.com/country-selector/index.html).\n\n For search all games you can use the CUSA key for regions: \n\n * `STORE-MSF75508-FULLGAMES` for Europe.\n\n * `STORE-MSF77008-ALLGAMES` for America.\n\n See more usefull information at [Github](https://github.com/olegshulyakov/psn-swagger) page",
+        "version": "1.0.1"
+    },
+    "externalDocs": {
+        "description": "Find out more about Swagger",
+        "url": "http://swagger.io"
+    },
+    "servers": [
+        {
+            "url": "https://store.playstation.com/"
+        }
+    ],
+    "tags": [
+        {
+            "name": "Geo",
+            "description": "Geo location"
+        },
+        {
+            "name": "Games",
+            "description": "Query JSON representation of the game from store"
+        },
+        {
+            "name": "Search",
+            "description": "Search JSON representation of the game"
+        },
+        {
+            "name": "Images",
+            "description": "Search JSON representation of the game"
+        }
+    ],
+    "paths": {
+        "/kamaji/api/chihiro/00_09_000/geo": {
+            "get": {
+                "tags": [
+                    "Geo"
+                ],
+                "summary": "Returns geo location",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {}
+                    },
+                    "400": {
+                        "description": "Invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": true
+            }
+        },
+        "/store/api/chihiro/00_09_000/container/{country}/{language}/{age}/{cusa}": {
+            "get": {
+                "tags": [
+                    "Games"
+                ],
+                "summary": "Find game information for specific container at country/region by CUSA.",
+                "parameters": [
+                    {
+                        "name": "country",
+                        "in": "path",
+                        "description": "Two symbols country code to search in, i.e. 'en'",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Country",
+                            "default": "gb"
+                        }
+                    },
+                    {
+                        "name": "language",
+                        "in": "path",
+                        "description": "Two symbols language code to search in, i.e. 'gb'",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Language",
+                            "default": "en"
+                        }
+                    },
+                    {
+                        "name": "age",
+                        "in": "path",
+                        "description": "User's age",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "default": 999
+                        }
+                    },
+                    {
+                        "name": "cusa",
+                        "in": "path",
+                        "description": "CUSA code to search",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "description": "Limit result count",
+                        "schema": {
+                            "minimum": 0,
+                            "type": "integer",
+                            "format": "int32",
+                            "default": 1
+                        }
+                    },
+                    {
+                        "name": "start",
+                        "in": "query",
+                        "description": "Offset",
+                        "schema": {
+                            "minimum": 0,
+                            "type": "integer",
+                            "format": "int32",
+                            "default": 0
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Sort by",
+                        "schema": {
+                            "$ref": "#/components/schemas/SortBy"
+                        }
+                    },
+                    {
+                        "name": "direction",
+                        "in": "query",
+                        "description": "Sort at",
+                        "schema": {
+                            "$ref": "#/components/schemas/SortOrder"
+                        }
+                    },
+                    {
+                        "name": "gameContentType",
+                        "in": "query",
+                        "description": "Content type",
+                        "schema": {
+                            "$ref": "#/components/schemas/ContentType"
+                        }
+                    },
+                    {
+                        "name": "subtitleLang",
+                        "in": "query",
+                        "description": "Subtitle language code or several values combined by comma, i.e. 'en', 'en,fr'",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "releaseDate",
+                        "in": "query",
+                        "description": "Release date",
+                        "schema": {
+                            "$ref": "#/components/schemas/ReleaseDate"
+                        }
+                    },
+                    {
+                        "name": "gameDemo",
+                        "in": "query",
+                        "description": "Is game demo",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "price",
+                        "in": "query",
+                        "description": "Price range, i.e. 100-1000",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "genre",
+                        "in": "query",
+                        "description": "Genre",
+                        "schema": {
+                            "$ref": "#/components/schemas/Genre"
+                        }
+                    },
+                    {
+                        "name": "topCategory",
+                        "in": "query",
+                        "description": "Top category",
+                        "schema": {
+                            "$ref": "#/components/schemas/TopCategory"
+                        }
+                    },
+                    {
+                        "name": "voiceLang",
+                        "in": "query",
+                        "description": "Voice language code or several values combined by comma, i.e. 'en', 'en,fr'",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "game_type",
+                        "in": "query",
+                        "description": "Game type",
+                        "schema": {
+                            "$ref": "#/components/schemas/GameType"
+                        }
+                    },
+                    {
+                        "name": "relationship",
+                        "in": "query",
+                        "description": "Relationship",
+                        "schema": {
+                            "$ref": "#/components/schemas/RelationShip"
+                        }
+                    },
+                    {
+                        "name": "platform",
+                        "in": "query",
+                        "description": "Platform",
+                        "schema": {
+                            "$ref": "#/components/schemas/Platform"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No data found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/chihiro-api/viewfinder/{country}/{language}/{age}/{cusa}": {
+            "get": {
+                "tags": [
+                    "Games"
+                ],
+                "summary": "Find game information for specific container at country/region by CUSA.",
+                "parameters": [
+                    {
+                        "name": "country",
+                        "in": "path",
+                        "description": "Two symbols country code to search in, i.e. 'en'",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Country",
+                            "default": "gb"
+                        }
+                    },
+                    {
+                        "name": "language",
+                        "in": "path",
+                        "description": "Two symbols language code to search in, i.e. 'gb'",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Language",
+                            "default": "en"
+                        }
+                    },
+                    {
+                        "name": "age",
+                        "in": "path",
+                        "description": "User's age",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 999,
+                            "default": 999
+                        }
+                    },
+                    {
+                        "name": "cusa",
+                        "in": "path",
+                        "description": "CUSA code to search",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "description": "Limit result count",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "default": 1
+                        }
+                    },
+                    {
+                        "name": "start",
+                        "in": "query",
+                        "description": "Offset",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "default": 0
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Sort By",
+                        "schema": {
+                            "$ref": "#/components/schemas/SortBy"
+                        }
+                    },
+                    {
+                        "name": "direction",
+                        "in": "query",
+                        "description": "Sort At",
+                        "schema": {
+                            "$ref": "#/components/schemas/SortOrder"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No data found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": true
+            }
+        },
+        "/store/api/chihiro/00_09_000/tumbler/{country}/{language}/{age}/{searchString}": {
+            "get": {
+                "tags": [
+                    "Search"
+                ],
+                "summary": "Find game information for specific container at country/region by search string.",
+                "parameters": [
+                    {
+                        "name": "country",
+                        "in": "path",
+                        "description": "Two symbols country code to search in, i.e. 'en'",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Country",
+                            "default": "gb"
+                        }
+                    },
+                    {
+                        "name": "language",
+                        "in": "path",
+                        "description": "Two symbols language code to search in, i.e. 'gb'",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Language",
+                            "default": "en"
+                        }
+                    },
+                    {
+                        "name": "age",
+                        "in": "path",
+                        "description": "User's age",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 999,
+                            "default": 999
+                        }
+                    },
+                    {
+                        "name": "searchString",
+                        "in": "path",
+                        "description": "String to search",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "description": "Limit result count",
+                        "schema": {
+                            "minimum": 0,
+                            "type": "integer",
+                            "format": "int32",
+                            "default": 1
+                        }
+                    },
+                    {
+                        "name": "start",
+                        "in": "query",
+                        "description": "Offset",
+                        "schema": {
+                            "minimum": 0,
+                            "type": "integer",
+                            "format": "int32",
+                            "default": 0
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Sort by",
+                        "schema": {
+                            "$ref": "#/components/schemas/SortBy",
+                            "default": null
+                        }
+                    },
+                    {
+                        "name": "direction",
+                        "in": "query",
+                        "description": "Sort at",
+                        "schema": {
+                            "$ref": "#/components/schemas/SortOrder",
+                            "default": null
+                        }
+                    },
+                    {
+                        "name": "gameContentType",
+                        "in": "query",
+                        "description": "Content type",
+                        "schema": {
+                            "$ref": "#/components/schemas/ContentType",
+                            "default": null
+                        }
+                    },
+                    {
+                        "name": "subtitleLang",
+                        "in": "query",
+                        "description": "Subtitle language code or several values combined by comma, i.e. 'en', 'en,fr'",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "releaseDate",
+                        "in": "query",
+                        "description": "Release date",
+                        "schema": {
+                            "$ref": "#/components/schemas/ReleaseDate"
+                        }
+                    },
+                    {
+                        "name": "gameDemo",
+                        "in": "query",
+                        "description": "Is game demo",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "price",
+                        "in": "query",
+                        "description": "Price range, i.e. 100-1000",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "genre",
+                        "in": "query",
+                        "description": "Genre",
+                        "schema": {
+                            "$ref": "#/components/schemas/Genre"
+                        }
+                    },
+                    {
+                        "name": "topCategory",
+                        "in": "query",
+                        "description": "Top Category",
+                        "schema": {
+                            "$ref": "#/components/schemas/TopCategory"
+                        }
+                    },
+                    {
+                        "name": "voiceLang",
+                        "in": "query",
+                        "description": "Voice language code or several values combined by comma, i.e. 'en', 'en,fr'",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "game_type",
+                        "in": "query",
+                        "description": "Game Type",
+                        "schema": {
+                            "$ref": "#/components/schemas/GameType"
+                        }
+                    },
+                    {
+                        "name": "relationship",
+                        "in": "query",
+                        "description": "Relationship",
+                        "schema": {
+                            "$ref": "#/components/schemas/RelationShip"
+                        }
+                    },
+                    {
+                        "name": "platform",
+                        "in": "query",
+                        "description": "Platform",
+                        "schema": {
+                            "$ref": "#/components/schemas/Platform"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No data found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/store/api/chihiro/00_09_000/container/{country}/{language}/{age}/{cusa}/image": {
+            "get": {
+                "tags": [
+                    "Images"
+                ],
+                "summary": "Find game image at country/region by CUSA.",
+                "parameters": [
+                    {
+                        "name": "country",
+                        "in": "path",
+                        "description": "Two symbols country code to search in, i.e. 'en'",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Country",
+                            "default": "gb"
+                        }
+                    },
+                    {
+                        "name": "language",
+                        "in": "path",
+                        "description": "Two symbols language code to search in, i.e. 'gb'",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Language",
+                            "default": "en"
+                        }
+                    },
+                    {
+                        "name": "age",
+                        "in": "path",
+                        "description": "User's age",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 999,
+                            "default": 999
+                        }
+                    },
+                    {
+                        "name": "cusa",
+                        "in": "path",
+                        "description": "CUSA code to search",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "w",
+                        "in": "query",
+                        "description": "Width in px",
+                        "schema": {
+                            "minimum": 0,
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "h",
+                        "in": "query",
+                        "description": "Height in px",
+                        "schema": {
+                            "minimum": 0,
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "bg_color",
+                        "in": "query",
+                        "description": "Background color",
+                        "schema": {
+                            "minimum": 0,
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "opacity",
+                        "in": "query",
+                        "description": "Opacity",
+                        "schema": {
+                            "maximum": 100,
+                            "minimum": 0,
+                            "type": "integer",
+                            "format": "int32",
+                            "default": 100
+                        }
+                    },
+                    {
+                        "name": "platform",
+                        "in": "query",
+                        "description": "Platform, i.e. 'chihiro'",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "image/jpeg;charset=UTF-8": {
+                                "schema": {
+                                    "type": "string",
+                                    "format": "binary"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No data found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "ErrorResponse": {
+                "required": [
+                    "codeName"
+                ],
+                "type": "object",
+                "properties": {
+                    "codeName": {
+                        "type": "string"
+                    },
+                    "cause": {
+                        "type": "string"
+                    },
+                    "errorUUID": {
+                        "type": "string"
+                    }
+                },
+                "description": "Error Response"
+            },
+            "Country": {
+                "type": "string",
+                "description": "Country value",
+                "enum": [
+                    "ae",
+                    "ar",
+                    "at",
+                    "au",
+                    "be",
+                    "bg",
+                    "br",
+                    "ca",
+                    "ch",
+                    "cl",
+                    "co",
+                    "cr",
+                    "cy",
+                    "cz",
+                    "de",
+                    "dk",
+                    "ec",
+                    "es",
+                    "fi",
+                    "fr",
+                    "gb",
+                    "gr",
+                    "gt",
+                    "hn",
+                    "hr",
+                    "hu",
+                    "ie",
+                    "in",
+                    "is",
+                    "it",
+                    "lu",
+                    "mt",
+                    "mx",
+                    "ni",
+                    "nl",
+                    "no",
+                    "nz",
+                    "pa",
+                    "pe",
+                    "pl",
+                    "pt",
+                    "py",
+                    "ro",
+                    "ru",
+                    "sa",
+                    "se",
+                    "si",
+                    "sk",
+                    "sv",
+                    "tr",
+                    "ua",
+                    "us",
+                    "uy",
+                    "za"
+                ]
+            },
+            "Language": {
+                "type": "string",
+                "description": "Language value",
+                "enum": [
+                    "ar",
+                    "bg",
+                    "cs",
+                    "da",
+                    "de",
+                    "el",
+                    "en",
+                    "es",
+                    "fi",
+                    "fr",
+                    "hr",
+                    "hu",
+                    "is",
+                    "it",
+                    "nl",
+                    "no",
+                    "pl",
+                    "pt",
+                    "ro",
+                    "ru",
+                    "sk",
+                    "sl",
+                    "sv",
+                    "tr",
+                    "uk"
+                ]
+            },
+            "SortBy": {
+                "type": "string",
+                "description": "Sort field",
+                "enum": [
+                    "timestamp",
+                    "release_date"
+                ]
+            },
+            "SortOrder": {
+                "type": "string",
+                "description": "Sort order",
+                "enum": [
+                    "asc",
+                    "desc"
+                ]
+            },
+            "ContentType": {
+                "type": "string",
+                "description": "Content type",
+                "enum": [
+                    "bundles",
+                    "games",
+                    "timed_trials"
+                ]
+            },
+            "ReleaseDate": {
+                "type": "string",
+                "description": "Release date",
+                "enum": [
+                    "coming_soon",
+                    "last_7_days",
+                    "last_30_days"
+                ]
+            },
+            "Genre": {
+                "type": "string",
+                "enum": [
+                    "action",
+                    "adult",
+                    "adventure",
+                    "arcade",
+                    "brain_training",
+                    "casual",
+                    "educational",
+                    "family",
+                    "fighting",
+                    "fitness",
+                    "horror",
+                    "musicrhythm",
+                    "party",
+                    "puzzle",
+                    "racing",
+                    "role_playing_games",
+                    "shooter",
+                    "simulation",
+                    "simulator",
+                    "sports",
+                    "strategy",
+                    "unique"
+                ]
+            },
+            "TopCategory": {
+                "type": "string",
+                "enum": [
+                    "demo",
+                    "disc_based_game",
+                    "downloadable_game",
+                    "game_content"
+                ]
+            },
+            "GameType": {
+                "type": "string",
+                "enum": [
+                    "bundles",
+                    "disc_only",
+                    "minis",
+                    "ps2_classics",
+                    "ps3_full_games",
+                    "ps4_full_games",
+                    "ps_vita_games",
+                    "psn_games",
+                    "psone_classics",
+                    "psp_games",
+                    "vr_games"
+                ]
+            },
+            "RelationShip": {
+                "type": "string",
+                "enum": [
+                    "bundles",
+                    "demos",
+                    "extras"
+                ]
+            },
+            "Platform": {
+                "type": "string",
+                "enum": [
+                    "ps4",
+                    "ps3",
+                    "psp",
+                    "vita"
+                ]
+            },
+            "RootCusa": {
+                "type": "string",
+                "enum": [
+                    "STORE-MSF75508-FULLGAMES",
+                    "STORE-MSF77008-ALLGAMES"
+                ]
+            }
+        }
+    }
+}

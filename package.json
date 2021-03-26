@@ -1,0 +1,22 @@
+{
+  "name": "psn-swagger",
+  "version": "0.0.1",
+  "description": "OpenAPI description of known Playstation Network APIs",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olegshulyakov/psn-swagger.git"
+  },
+  "keywords": [
+    "swagger",
+    "playstation",
+    "playstation-api",
+    "api"
+  ],
+  "author": "Oleg Shulyakov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/olegshulyakov/psn-swagger/issues"
+  },
+  "homepage": "https://github.com/olegshulyakov/psn-swagger#readme"
+}

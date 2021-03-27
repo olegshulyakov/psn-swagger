@@ -6,7 +6,7 @@
         "license": {
             "name": "MIT"
         },
-        "version": "1.0.4"
+        "version": "1.0.5"
     },
     "externalDocs": {
         "description": "OpenAPI Specification",
@@ -244,7 +244,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/StoreResponse"
                                 }
                             }
                         }
@@ -366,7 +366,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/StoreResponse"
                                 }
                             }
                         }
@@ -577,7 +577,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/Store"
                                 }
                             }
                         }
@@ -620,8 +620,7 @@
                         "description": "Two symbols country code to search in, i.e. 'en'",
                         "required": true,
                         "schema": {
-                            "$ref": "#/components/schemas/Country",
-                            "default": "gb"
+                            "$ref": "#/components/schemas/Country"
                         }
                     },
                     {
@@ -630,8 +629,7 @@
                         "description": "Two symbols language code to search in, i.e. 'gb'",
                         "required": true,
                         "schema": {
-                            "$ref": "#/components/schemas/Language",
-                            "default": "en"
+                            "$ref": "#/components/schemas/Language"
                         }
                     },
                     {
@@ -961,6 +959,1041 @@
                 "enum": [
                     "STORE-MSF75508-FULLGAMES",
                     "STORE-MSF77008-ALLGAMES"
+                ]
+            },
+            "StoreResponse": {
+                "anyOf": [
+                    {
+                        "$ref": "#/components/schemas/Store"
+                    },
+                    {
+                        "$ref": "#/components/schemas/Game"
+                    }
+                ]
+            },
+            "Store": {
+                "type": "object",
+                "properties": {
+                    "age_limit": {
+                        "type": "number"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "facets": {
+                                "type": "object",
+                                "properties": {
+                                    "game_content_type": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "count": {
+                                                    "type": "number"
+                                                },
+                                                "key": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "name",
+                                                "count",
+                                                "key"
+                                            ]
+                                        }
+                                    },
+                                    "subtitle_lang": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "count": {
+                                                    "type": "number"
+                                                },
+                                                "key": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "name",
+                                                "count",
+                                                "key"
+                                            ]
+                                        }
+                                    },
+                                    "release_date": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "count": {
+                                                    "type": "number"
+                                                },
+                                                "key": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "name",
+                                                "count",
+                                                "key"
+                                            ]
+                                        }
+                                    },
+                                    "game_demo": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "count": {
+                                                    "type": "number"
+                                                },
+                                                "key": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "name",
+                                                "count",
+                                                "key"
+                                            ]
+                                        }
+                                    },
+                                    "price": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "count": {
+                                                    "type": "number"
+                                                },
+                                                "key": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "name",
+                                                "count",
+                                                "key"
+                                            ]
+                                        }
+                                    },
+                                    "genre": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "count": {
+                                                    "type": "number"
+                                                },
+                                                "key": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "name",
+                                                "count",
+                                                "key"
+                                            ]
+                                        }
+                                    },
+                                    "top_category": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "count": {
+                                                    "type": "number"
+                                                },
+                                                "key": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "name",
+                                                "count",
+                                                "key"
+                                            ]
+                                        }
+                                    },
+                                    "voice_lang": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "count": {
+                                                    "type": "number"
+                                                },
+                                                "key": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "name",
+                                                "count",
+                                                "key"
+                                            ]
+                                        }
+                                    },
+                                    "game_type": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "count": {
+                                                    "type": "number"
+                                                },
+                                                "key": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "name",
+                                                "count",
+                                                "key"
+                                            ]
+                                        }
+                                    },
+                                    "relationship": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "count": {
+                                                    "type": "number"
+                                                },
+                                                "key": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "name",
+                                                "count",
+                                                "key"
+                                            ]
+                                        }
+                                    },
+                                    "platform": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "count": {
+                                                    "type": "number"
+                                                },
+                                                "key": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "name",
+                                                "count",
+                                                "key"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "game_content_type",
+                                    "subtitle_lang",
+                                    "release_date",
+                                    "game_demo",
+                                    "price",
+                                    "genre",
+                                    "top_category",
+                                    "voice_lang",
+                                    "game_type",
+                                    "relationship",
+                                    "platform"
+                                ]
+                            },
+                            "next": {
+                                "type": "array",
+                                "items": {}
+                            }
+                        },
+                        "required": [
+                            "facets",
+                            "next"
+                        ]
+                    },
+                    "container_type": {
+                        "type": "string"
+                    },
+                    "content_origin": {
+                        "type": "number"
+                    },
+                    "dob_required": {
+                        "type": "boolean"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "images": {
+                        "type": "array",
+                        "items": {}
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Game"
+                        }
+                    },
+                    "long_desc": {
+                        "type": "string"
+                    },
+                    "metadata": {
+                        "type": "object",
+                        "properties": {}
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "promomedia": {
+                        "type": "array",
+                        "items": {}
+                    },
+                    "restricted": {
+                        "type": "boolean"
+                    },
+                    "revision": {
+                        "type": "number"
+                    },
+                    "scene_layout": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "number"
+                            },
+                            "catalogEntryId": {
+                                "type": "string"
+                            },
+                            "storeFrontId": {
+                                "type": "number"
+                            },
+                            "templateId": {
+                                "type": "number"
+                            },
+                            "subScenes": {
+                                "type": "array",
+                                "items": {}
+                            },
+                            "storeTypeId": {
+                                "type": "number"
+                            }
+                        },
+                        "required": [
+                            "id",
+                            "catalogEntryId",
+                            "storeFrontId",
+                            "templateId",
+                            "subScenes",
+                            "storeTypeId"
+                        ]
+                    },
+                    "size": {
+                        "type": "number"
+                    },
+                    "sku_links": {
+                        "type": "array",
+                        "items": {}
+                    },
+                    "sort": {
+                        "type": "string"
+                    },
+                    "start": {
+                        "type": "number"
+                    },
+                    "template_def": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            },
+                            "id": {
+                                "type": "number"
+                            },
+                            "storeTypeId": {
+                                "type": "number"
+                            },
+                            "imageUrl": {},
+                            "locations": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "number"
+                                        },
+                                        "name": {},
+                                        "width": {
+                                            "type": "string"
+                                        },
+                                        "height": {
+                                            "type": "string"
+                                        },
+                                        "offsetX": {
+                                            "type": "string"
+                                        },
+                                        "offsetY": {
+                                            "type": "string"
+                                        },
+                                        "widgets": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "name": {},
+                                                    "id": {
+                                                        "type": "number"
+                                                    },
+                                                    "tag": {},
+                                                    "width": {},
+                                                    "height": {},
+                                                    "offsetX": {},
+                                                    "offsetY": {},
+                                                    "order": {
+                                                        "type": "string"
+                                                    },
+                                                    "locationWidgetId": {
+                                                        "type": "number"
+                                                    },
+                                                    "nsx_space": {}
+                                                },
+                                                "required": [
+                                                    "name",
+                                                    "id",
+                                                    "tag",
+                                                    "width",
+                                                    "height",
+                                                    "offsetX",
+                                                    "offsetY",
+                                                    "order",
+                                                    "locationWidgetId",
+                                                    "nsx_space"
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "name",
+                                        "width",
+                                        "height",
+                                        "offsetX",
+                                        "offsetY"
+                                    ]
+                                }
+                            },
+                            "extras": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "templateExtraId": {
+                                            "type": "number"
+                                        },
+                                        "width": {
+                                            "type": "number"
+                                        },
+                                        "height": {
+                                            "type": "number"
+                                        },
+                                        "name": {},
+                                        "key": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "templateExtraId",
+                                        "width",
+                                        "height",
+                                        "name",
+                                        "key"
+                                    ]
+                                }
+                            }
+                        },
+                        "required": [
+                            "name",
+                            "id",
+                            "storeTypeId",
+                            "imageUrl",
+                            "locations",
+                            "extras"
+                        ]
+                    },
+                    "timestamp": {
+                        "type": "number"
+                    },
+                    "total_results": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "age_limit",
+                    "attributes",
+                    "container_type",
+                    "content_origin",
+                    "dob_required",
+                    "id",
+                    "images",
+                    "links",
+                    "long_desc",
+                    "metadata",
+                    "name",
+                    "promomedia",
+                    "restricted",
+                    "revision",
+                    "scene_layout",
+                    "size",
+                    "sku_links",
+                    "sort",
+                    "start",
+                    "template_def",
+                    "timestamp",
+                    "total_results"
+                ]
+            },
+            "Game": {
+                "type": "object",
+                "properties": {
+                    "bucket": {
+                        "type": "string"
+                    },
+                    "container_type": {
+                        "type": "string"
+                    },
+                    "content_type": {
+                        "type": "string"
+                    },
+                    "default_sku": {
+                        "type": "object",
+                        "properties": {
+                            "amortizeFlag": {
+                                "type": "boolean"
+                            },
+                            "bundleExclusiveFlag": {
+                                "type": "boolean"
+                            },
+                            "chargeImmediatelyFlag": {
+                                "type": "boolean"
+                            },
+                            "charge_type_id": {
+                                "type": "number"
+                            },
+                            "credit_card_required_flag": {
+                                "type": "number"
+                            },
+                            "defaultSku": {
+                                "type": "boolean"
+                            },
+                            "display_price": {
+                                "type": "string"
+                            },
+                            "eligibilities": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "operand": {
+                                            "type": "string"
+                                        },
+                                        "operator": {
+                                            "type": "string"
+                                        },
+                                        "rightOperand": {},
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "description": {},
+                                        "entitlement_type": {},
+                                        "drms": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string"
+                                                    },
+                                                    "libraryPath": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "id",
+                                                    "libraryPath"
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "operand",
+                                        "operator",
+                                        "rightOperand",
+                                        "name",
+                                        "description",
+                                        "entitlement_type",
+                                        "drms"
+                                    ]
+                                }
+                            },
+                            "entitlements": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "description": {},
+                                        "drms": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "drm_category_type": {
+                                                        "type": "number"
+                                                    },
+                                                    "id": {
+                                                        "type": "string"
+                                                    },
+                                                    "is_streamable": {
+                                                        "type": "number"
+                                                    },
+                                                    "media_prop": {
+                                                        "type": "object",
+                                                        "properties": {}
+                                                    },
+                                                    "size": {
+                                                        "type": "number"
+                                                    },
+                                                    "type": {
+                                                        "type": "number"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "drm_category_type",
+                                                    "id",
+                                                    "is_streamable",
+                                                    "media_prop",
+                                                    "size",
+                                                    "type"
+                                                ]
+                                            }
+                                        },
+                                        "duration": {
+                                            "type": "number"
+                                        },
+                                        "durationOverrideTypeId": {},
+                                        "exp_after_first_use": {
+                                            "type": "number"
+                                        },
+                                        "feature_type_id": {
+                                            "type": "number"
+                                        },
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "license_type": {
+                                            "type": "number"
+                                        },
+                                        "metadata": {
+                                            "type": "object",
+                                            "properties": {
+                                                "subtitleLanguageCode": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "voiceLanguageCode": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "packageSubType": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "packageType": {
+                                            "type": "string"
+                                        },
+                                        "packages": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "platformId": {
+                                                        "type": "number"
+                                                    },
+                                                    "platformName": {
+                                                        "type": "string"
+                                                    },
+                                                    "size": {
+                                                        "type": "number"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "platformId",
+                                                    "platformName",
+                                                    "size"
+                                                ]
+                                            }
+                                        },
+                                        "preorder_placeholder_flag": {
+                                            "type": "boolean"
+                                        },
+                                        "size": {
+                                            "type": "number"
+                                        },
+                                        "subType": {
+                                            "type": "number"
+                                        },
+                                        "subtitle_language_codes": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": {
+                                            "type": "number"
+                                        },
+                                        "use_count": {
+                                            "type": "number"
+                                        },
+                                        "voice_language_codes": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "description",
+                                        "drms",
+                                        "duration",
+                                        "durationOverrideTypeId",
+                                        "exp_after_first_use",
+                                        "feature_type_id",
+                                        "id",
+                                        "license_type",
+                                        "name",
+                                        "packages",
+                                        "preorder_placeholder_flag",
+                                        "size",
+                                        "subType",
+                                        "type",
+                                        "use_count"
+                                    ]
+                                }
+                            },
+                            "id": {
+                                "type": "string"
+                            },
+                            "is_original": {
+                                "type": "boolean"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "platforms": {
+                                "type": "array",
+                                "items": {
+                                    "type": "number"
+                                }
+                            },
+                            "price": {
+                                "type": "number"
+                            },
+                            "rewards": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "entitlement_id": {
+                                            "type": "string"
+                                        },
+                                        "discount": {
+                                            "type": "number"
+                                        },
+                                        "price": {
+                                            "type": "number"
+                                        },
+                                        "reward_type": {
+                                            "type": "number"
+                                        },
+                                        "display_price": {
+                                            "type": "string"
+                                        },
+                                        "isPlus": {
+                                            "type": "boolean"
+                                        },
+                                        "isEAAccess": {
+                                            "type": "boolean"
+                                        },
+                                        "campaigns": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string"
+                                                    },
+                                                    "start_date": {
+                                                        "type": "string"
+                                                    },
+                                                    "end_date": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "id",
+                                                    "start_date"
+                                                ]
+                                            }
+                                        },
+                                        "reward_source_type_id": {
+                                            "type": "number"
+                                        },
+                                        "start_date": {
+                                            "type": "string"
+                                        },
+                                        "service_provider_id": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "description": {
+                                            "type": "string"
+                                        },
+                                        "rewardSourceId": {
+                                            "type": "number"
+                                        },
+                                        "end_date": {
+                                            "type": "string"
+                                        },
+                                        "bonus_discount": {
+                                            "type": "number"
+                                        },
+                                        "bonus_entitlement_id": {
+                                            "type": "string"
+                                        },
+                                        "bonus_price": {
+                                            "type": "number"
+                                        },
+                                        "bonus_display_price": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "discount",
+                                        "price",
+                                        "reward_type",
+                                        "display_price",
+                                        "isPlus",
+                                        "reward_source_type_id",
+                                        "start_date"
+                                    ]
+                                }
+                            },
+                            "seasonPassExclusiveFlag": {
+                                "type": "boolean"
+                            },
+                            "skuAvailabilityOverrideFlag": {
+                                "type": "boolean"
+                            },
+                            "sku_type": {
+                                "type": "number"
+                            },
+                            "type": {
+                                "type": "string"
+                            },
+                            "end_date": {
+                                "type": "string"
+                            },
+                            "augmented_description": {
+                                "type": "string"
+                            },
+                            "playability_date": {
+                                "type": "string"
+                            },
+                            "wallet_charge_date": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "amortizeFlag",
+                            "bundleExclusiveFlag",
+                            "chargeImmediatelyFlag",
+                            "charge_type_id",
+                            "credit_card_required_flag",
+                            "defaultSku",
+                            "display_price",
+                            "eligibilities",
+                            "entitlements",
+                            "id",
+                            "is_original",
+                            "name",
+                            "platforms",
+                            "price",
+                            "rewards",
+                            "seasonPassExclusiveFlag",
+                            "skuAvailabilityOverrideFlag",
+                            "sku_type",
+                            "type"
+                        ]
+                    },
+                    "gameContentTypesList": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "key": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "key"
+                            ]
+                        }
+                    },
+                    "game_contentType": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "images": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "type": {
+                                    "type": "number"
+                                },
+                                "url": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "type",
+                                "url"
+                            ]
+                        }
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "playable_platform": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "release_date": {
+                        "type": "string"
+                    },
+                    "restricted": {
+                        "type": "boolean"
+                    },
+                    "revision": {
+                        "type": "number"
+                    },
+                    "short_name": {
+                        "type": "string"
+                    },
+                    "timestamp": {
+                        "type": "number"
+                    },
+                    "top_category": {
+                        "type": "string"
+                    },
+                    "url": {
+                        "type": "string"
+                    },
+                    "provider_name": {
+                        "type": "string"
+                    },
+                    "parent_name": {
+                        "type": "string"
+                    },
+                    "cloud_only_platform": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "bundleChildTypeId": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "bucket",
+                    "container_type",
+                    "content_type",
+                    "id",
+                    "images",
+                    "name",
+                    "playable_platform",
+                    "release_date",
+                    "restricted",
+                    "revision",
+                    "short_name",
+                    "timestamp",
+                    "top_category",
+                    "url"
                 ]
             }
         }

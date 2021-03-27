@@ -1,17 +1,21 @@
 {
-    "openapi": "3.0.1",
+    "openapi": "3.0.2",
     "info": {
         "title": "Playstation Store API",
         "description": "This is a sample Playstation Store server.  You can find out more about Country/Region at [PSN Country selector](https://www.playstation.com/country-selector/index.html).\n\n For search all games you can use the CUSA key for regions: \n\n * `STORE-MSF75508-FULLGAMES` for Europe.\n\n * `STORE-MSF77008-ALLGAMES` for America.\n\n See more usefull information at [Github](https://github.com/olegshulyakov/psn-swagger) page",
-        "version": "1.0.1"
+        "license": {
+            "name": "MIT"
+        },
+        "version": "1.0.4"
     },
     "externalDocs": {
-        "description": "Find out more about Swagger",
-        "url": "http://swagger.io"
+        "description": "OpenAPI Specification",
+        "url": "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md"
     },
     "servers": [
         {
-            "url": "https://store.playstation.com/"
+            "url": "https://store.playstation.com/",
+            "description": "Playstation Store server"
         }
     ],
     "tags": [
@@ -38,7 +42,9 @@
                 "tags": [
                     "Geo"
                 ],
-                "summary": "Returns geo location",
+                "summary": "Get location",
+                "description": "Returns geo location",
+                "operationId": "GetGeo",
                 "responses": {
                     "200": {
                         "description": "Success",
@@ -63,7 +69,9 @@
                 "tags": [
                     "Games"
                 ],
-                "summary": "Find game information for specific container at country/region by CUSA.",
+                "summary": "Get game by CUSA code",
+                "description": "Find game information for specific container at country/region by CUSA.",
+                "operationId": "GetGame",
                 "parameters": [
                     {
                         "name": "country",
@@ -71,8 +79,7 @@
                         "description": "Two symbols country code to search in, i.e. 'en'",
                         "required": true,
                         "schema": {
-                            "$ref": "#/components/schemas/Country",
-                            "default": "gb"
+                            "$ref": "#/components/schemas/Country"
                         }
                     },
                     {
@@ -81,8 +88,7 @@
                         "description": "Two symbols language code to search in, i.e. 'gb'",
                         "required": true,
                         "schema": {
-                            "$ref": "#/components/schemas/Language",
-                            "default": "en"
+                            "$ref": "#/components/schemas/Language"
                         }
                     },
                     {
@@ -271,7 +277,9 @@
                 "tags": [
                     "Games"
                 ],
-                "summary": "Find game information for specific container at country/region by CUSA.",
+                "summary": "Find game by CUSA code",
+                "description": "Find game information for specific container at country/region by CUSA.",
+                "operationId": "GetGameOld",
                 "parameters": [
                     {
                         "name": "country",
@@ -279,8 +287,7 @@
                         "description": "Two symbols country code to search in, i.e. 'en'",
                         "required": true,
                         "schema": {
-                            "$ref": "#/components/schemas/Country",
-                            "default": "gb"
+                            "$ref": "#/components/schemas/Country"
                         }
                     },
                     {
@@ -289,8 +296,7 @@
                         "description": "Two symbols language code to search in, i.e. 'gb'",
                         "required": true,
                         "schema": {
-                            "$ref": "#/components/schemas/Language",
-                            "default": "en"
+                            "$ref": "#/components/schemas/Language"
                         }
                     },
                     {
@@ -394,7 +400,9 @@
                 "tags": [
                     "Search"
                 ],
-                "summary": "Find game information for specific container at country/region by search string.",
+                "summary": "Search game",
+                "description": "Find game information for specific container at country/region by search string.",
+                "operationId": "SearchGame",
                 "parameters": [
                     {
                         "name": "country",
@@ -402,8 +410,7 @@
                         "description": "Two symbols country code to search in, i.e. 'en'",
                         "required": true,
                         "schema": {
-                            "$ref": "#/components/schemas/Country",
-                            "default": "gb"
+                            "$ref": "#/components/schemas/Country"
                         }
                     },
                     {
@@ -412,8 +419,7 @@
                         "description": "Two symbols language code to search in, i.e. 'gb'",
                         "required": true,
                         "schema": {
-                            "$ref": "#/components/schemas/Language",
-                            "default": "en"
+                            "$ref": "#/components/schemas/Language"
                         }
                     },
                     {
@@ -465,8 +471,7 @@
                         "in": "query",
                         "description": "Sort by",
                         "schema": {
-                            "$ref": "#/components/schemas/SortBy",
-                            "default": null
+                            "$ref": "#/components/schemas/SortBy"
                         }
                     },
                     {
@@ -474,8 +479,7 @@
                         "in": "query",
                         "description": "Sort at",
                         "schema": {
-                            "$ref": "#/components/schemas/SortOrder",
-                            "default": null
+                            "$ref": "#/components/schemas/SortOrder"
                         }
                     },
                     {
@@ -483,8 +487,7 @@
                         "in": "query",
                         "description": "Content type",
                         "schema": {
-                            "$ref": "#/components/schemas/ContentType",
-                            "default": null
+                            "$ref": "#/components/schemas/ContentType"
                         }
                     },
                     {
@@ -607,7 +610,9 @@
                 "tags": [
                     "Images"
                 ],
-                "summary": "Find game image at country/region by CUSA.",
+                "summary": "Get game image",
+                "description": "Find game image at country/region by CUSA.",
+                "operationId": "GetGameImage",
                 "parameters": [
                     {
                         "name": "country",
